@@ -1,4 +1,4 @@
 # SortCompare
 ## Instructions
 * Clone this Repo
-  * <code> git clone [this repo url.git] 
+  * <code> git clone https://github.com/Tscheschlog/SortCompare.git <code /> 
