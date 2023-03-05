@@ -1,5 +1,6 @@
 # SortCompare
-Compare Different Sorting algos
+Compare Different Sorting algorithms
+## Algorithms Implemented
 
 # Tools
 * JavaScript
