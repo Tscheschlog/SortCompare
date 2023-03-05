@@ -1,2 +1,4 @@
 # SortCompare
-Compare different sortting algorithms
+## Instructions
+* Clone this Repo
+  * <code> git clone [this repo url.git] 
