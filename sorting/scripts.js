@@ -26,7 +26,7 @@ ctx1.fillStyle = "black";
 ctx2.imageSmoothingEnabled = true;
 ctx2.fillStyle = "black";
 
-let speed = 0;
+let speed = 100;
 
 const algoTitles = ["Bubble Sort","Insertion Sort", "Selection Sort", "Merge Sort", "Quick Sort"];
 
@@ -139,13 +139,12 @@ async function bubbleSort(currScreen) {
     for(let i = 0; i < numBars; i++) {
         if(globalStop) return;
         for(let j = i + 1; j < numBars; j++) {
-        
-        if(currScreen.heights[i] > currScreen.heights[j]) {
-            [currScreen.heights[i], currScreen.heights[j]] = [currScreen.heights[j], currScreen.heights[i]];
-        }
-        if(globalStop) return;
-        currScreen.drawBars2(i, j);
-        await wait(speed);
+            if(currScreen.heights[i] > currScreen.heights[j]) {
+                [currScreen.heights[i], currScreen.heights[j]] = [currScreen.heights[j], currScreen.heights[i]];
+            }
+            if(globalStop) return;
+            currScreen.drawBars2(i, j);
+            await wait(speed);
         }
     }
     
@@ -193,18 +192,23 @@ async function merge(currScreen, arr, start, mid, end) {
     let rightIndex = 0;
     for (let i = start; i <= end; i++) {
             if(globalStop) return;
+            
+            // Left array is empty
             if (leftIndex >= leftArr.length) {
                 arr[i] = rightArr[rightIndex];
                 rightIndex++;
             } 
+            // right array is empty
             else if (rightIndex >= rightArr.length) {
                 arr[i] = leftArr[leftIndex];
                 leftIndex++;
             } 
+            // current value in left array is smaller than right array
             else if (leftArr[leftIndex] < rightArr[rightIndex]) {
                 arr[i] = leftArr[leftIndex];
                 leftIndex++;
             } 
+            // current value in right array is smaller than left array
             else {
                 arr[i] = rightArr[rightIndex];
                 rightIndex++;
@@ -231,9 +235,10 @@ async function partition(currScreen, arr, start, end) {
     for (let i = start; i < end; i++) {
         if(globalStop) return;
         if (arr[i] < pivotValue) {
-        await swap(currScreen, arr, i, pivotIndex);
-        pivotIndex++;
+            await swap(currScreen, arr, i, pivotIndex);
+            pivotIndex++;
         }
+        await wait(speed);
     }
     await swap(currScreen, arr, end, pivotIndex);
     return pivotIndex;
@@ -242,7 +247,6 @@ async function partition(currScreen, arr, start, end) {
 async function swap(currScreen, arr, i, j) {
     if(globalStop) return;
     currScreen.drawBars2(currScreen.heights.indexOf(arr[i]), currScreen.heights.indexOf(arr[j]));
-    await wait(speed);
     const temp = arr[i];
     arr[i] = arr[j];
     arr[j] = temp;
